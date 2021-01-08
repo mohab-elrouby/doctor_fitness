@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/BMIcalculator">
+
+    <fragment
+        android:id="@+id/BMIcalculator"
+        android:name="com.example.fitnessdoctor.BMIcalculator"
+        android:label="BMI Calculator"
+        tools:layout="@layout/fragment_b_m_icalculator" />
+    <fragment
+        android:id="@+id/calorieCalculator"
+        android:name="com.example.fitnessdoctor.CalorieCalculator"
+        android:label="Calories Calculator"
+        tools:layout="@layout/fragment_calorie_calculator" />
+    <fragment
+        android:id="@+id/idealWeightCalculator"
+        android:name="com.example.fitnessdoctor.IdealWeightCalculator"
+        android:label="Ideal Weight Calculator"
+        tools:layout="@layout/fragment_ideal_weight_calculator" />
+    <fragment
+        android:id="@+id/stepCounterFragment"
+        android:name="com.example.fitnessdoctor.StepCounterFragment"
+        android:label="Steps Counter"/>
+<!--    <action-->
+<!--        android:id="@+id/action_navigation_pop"-->
+<!--        app:popUpTo="@id/navigation"-->
+<!--        app:popUpToInclusive="true"-->
+<!--        app:clearTask="true"/>-->
+
+</navigation>

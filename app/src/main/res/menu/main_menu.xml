@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/BMIcalculator"
+        android:icon="@drawable/bmi"
+        android:title="BMI Calculator" />
+
+    <item
+        android:id="@+id/idealWeightCalculator"
+        android:icon="@drawable/diet"
+        android:title="Ideal Weight" />
+    <item
+        android:id="@+id/calorieCalculator"
+        android:icon="@drawable/calories"
+        android:title="Calories" />
+
+    <item android:title="Steps Counter"
+        android:icon="@drawable/footsteps"
+        android:id="@+id/stepCounterFragment"/>
+
+</menu>
