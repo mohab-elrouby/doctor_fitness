@@ -1,6 +1,7 @@
 package com.example.fitnessdoctor;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -46,6 +47,8 @@ public class StepCounterFragment extends Fragment implements SensorEventListener
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        loadData();
+        resetSteps();
 
     }
 
@@ -64,16 +67,19 @@ public class StepCounterFragment extends Fragment implements SensorEventListener
         arcGauge = view.findViewById(R.id.progress_circular);
         navController = Navigation.findNavController(view);
         sensorManager = (SensorManager) this.getActivity().getSystemService(Context.SENSOR_SERVICE);
+        arcGauge.setValue(0);
 
         btnStart.setOnClickListener(v -> {
             try {
                 meters = Double.parseDouble(etMeters.getText().toString());
             }
             catch (NumberFormatException e){e.printStackTrace();}
-            numberOfSteps = meters*1.31;
-            arcGauge.setMaxValue((int)numberOfSteps);
+            //resetSteps();
+//            numberOfSteps = meters*1.31;
             arcGauge.setValue(0);
+            arcGauge.setMaxValue(10);
         });
+
     }
 
     @Override
@@ -99,13 +105,33 @@ public class StepCounterFragment extends Fragment implements SensorEventListener
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (running){
-           // int currentSteps = (int)(numberOfSteps - previousNumberOfSteps);
-            arcGauge.setValue(event.values[0]);
+            numberOfSteps = event.values[0];
+            int currentSteps = (int)(numberOfSteps - previousNumberOfSteps);
+            arcGauge.setValue(currentSteps);
+            arcGauge.setMaxValue((int)meters*1.31);
         }
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+    private void resetSteps(){
+        previousNumberOfSteps = numberOfSteps;
+        saveData();
+    }
+
+    private void saveData(){
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putFloat("key1", (float) previousNumberOfSteps);
+        editor.apply();
+    }
+
+    private void loadData(){
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        Float savedNumber = sharedPreferences.getFloat("key1", 0);
+        previousNumberOfSteps = savedNumber;
     }
 }
