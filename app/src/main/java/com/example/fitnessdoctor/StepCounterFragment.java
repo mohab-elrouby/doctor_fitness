@@ -27,7 +27,7 @@ import com.ekn.gruzer.gaugelibrary.ArcGauge;
 import java.text.DecimalFormat;
 import java.util.Set;
 
-
+// here is a comment to test our ssh key
 public class StepCounterFragment extends Fragment implements SensorEventListener {
     EditText etMeters;
     Button btnStart;
